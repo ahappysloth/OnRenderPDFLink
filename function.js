@@ -1,4 +1,4 @@
-const htmlToPdf = async ({ pdfUrl, fileName }) => {
+window.function = async function({ pdfUrl, fileName }) {
     return new Promise((resolve, reject) => {
         fetch(pdfUrl)
             .then(response => response.text())
@@ -12,13 +12,11 @@ const htmlToPdf = async ({ pdfUrl, fileName }) => {
                     jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
                 };
 
-                html2pdf().from(element).set(opt).outputPdf('datauristring').then(pdfUrl => {
-                    resolve(pdfUrl);
+                html2pdf().from(element).set(opt).outputPdf('datauristring').then(pdfDataUrl => {
+                    resolve(pdfDataUrl);
                 }).catch(error => {
                     reject(error);
                 });
             });
     });
 };
-
-export default htmlToPdf;
