@@ -1,35 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Base64 HTML Decoder</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML to PDF</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    function getUrlParameter(name) {
+      name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+      var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+      var results = regex.exec(location.search);
+      return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+
+    function loadPdfContent() {
+      const pdfContent = getUrlParameter('PDF');
+      if (pdfContent) {
+        document.getElementById('content').innerHTML = pdfContent;
+        // The print dialog has been removed, so content will only be displayed
+      }
+    }
+  </script>
 </head>
-<body>
-    <h1>Base64 HTML Decoder</h1>
-    <p>Enter your Base64 encoded HTML content in the URL parameter <code>?content=</code>.</p>
 
-    <div id="decoded-content"></div>
-
-    <script>
-        // Function to decode Base64 content and display it
-        function decodeBase64Content() {
-            const params = new URLSearchParams(window.location.search);
-            const encodedContent = params.get('content');
-
-            if (encodedContent) {
-                // Decode the Base64 string
-                const decodedContent = atob(encodedContent);
-                
-                // Insert the decoded content into the div
-                document.getElementById('decoded-content').innerHTML = decodedContent;
-            } else {
-                document.getElementById('decoded-content').innerText = "No content provided.";
-            }
-        }
-
-        // Run the function on page load
-        decodeBase64Content();
-    </script>
+<body onload="loadPdfContent()">
+  <div id="content"></div>
 </body>
+
 </html>
