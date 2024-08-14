@@ -1,15 +1,35 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>HTML TO PDF</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64 HTML Decoder</title>
 </head>
-
 <body>
-  <p>Visit <a href="https://www.skool.com/loqode">Loqode.com</a> to level-up your Glide skills.</p>
-  <script src="function.js"></script>
-  <script src="driver.js"></script>
-</body>
+    <h1>Base64 HTML Decoder</h1>
+    <p>Enter your Base64 encoded HTML content in the URL parameter <code>?content=</code>.</p>
 
+    <div id="decoded-content"></div>
+
+    <script>
+        // Function to decode Base64 content and display it
+        function decodeBase64Content() {
+            const params = new URLSearchParams(window.location.search);
+            const encodedContent = params.get('content');
+
+            if (encodedContent) {
+                // Decode the Base64 string
+                const decodedContent = atob(encodedContent);
+                
+                // Insert the decoded content into the div
+                document.getElementById('decoded-content').innerHTML = decodedContent;
+            } else {
+                document.getElementById('decoded-content').innerText = "No content provided.";
+            }
+        }
+
+        // Run the function on page load
+        decodeBase64Content();
+    </script>
+</body>
 </html>
