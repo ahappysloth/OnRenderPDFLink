@@ -1,0 +1,23 @@
+[
+	{
+    "kind": "column",
+    "name": "HTML to PDF",
+    "description": "Converts an HTML URL to a downloadable PDF.",
+    "author": "Your Name <your.email@example.com>",
+    "params": [
+        {
+            "name": "pdfUrl",
+            "displayName": "PDF URL",
+            "type": "string"
+        },
+        {
+            "name": "fileName",
+            "displayName": "Filename",
+            "type": "string"
+        }
+    ],
+    "result": {
+        "type": "string"
+    }
+}
+]
