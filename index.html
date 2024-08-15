@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HTML to PDF</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Data URI Viewer</title>
   <script>
     function getUrlParameter(name) {
       name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -14,18 +12,14 @@
       return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
     }
 
-    function loadPdfContent() {
-      const pdfContent = getUrlParameter('PDF');
-      if (pdfContent) {
-        document.getElementById('content').innerHTML = pdfContent;
-        // The print dialog has been removed, so content will only be displayed
+    function loadContent() {
+      const content = getUrlParameter('data');
+      if (content) {
+        window.location.href = content;
       }
     }
   </script>
 </head>
-
-<body onload="loadPdfContent()">
-  <div id="content"></div>
+<body onload="loadContent()">
 </body>
-
 </html>
