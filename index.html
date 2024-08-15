@@ -1,39 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HTML Content Viewer</title>
+  <title>Data URI Viewer</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     function loadContent() {
-      const contentArea = document.getElementById('contentArea');
-      const displayArea = document.getElementById('displayArea');
-      const loadButton = document.getElementById('loadButton');
-
-      loadButton.addEventListener('click', function() {
-        const content = contentArea.value;
-        displayArea.innerHTML = content;
-        contentArea.style.display = 'none';
-        loadButton.style.display = 'none';
-      });
-
-      // Check if there's content in the URL (for smaller content)
-      const urlContent = new URLSearchParams(window.location.search).get('content');
-      if (urlContent) {
-        displayArea.innerHTML = urlContent;
-        contentArea.style.display = 'none';
-        loadButton.style.display = 'none';
+      const urlParams = new URLSearchParams(window.location.search);
+      const content = urlParams.get('content');
+      
+      if (content) {
+        const iframe = document.createElement('iframe');
+        iframe.style.width = '100%';
+        iframe.style.height = '100vh';
+        iframe.style.border = 'none';
+        iframe.src = content;
+        document.body.appendChild(iframe);
+      } else {
+        document.getElementById('input-area').style.display = 'block';
       }
+    }
+
+    function handleSubmit() {
+      const input = document.getElementById('uri-input').value;
+      window.location.href = window.location.pathname + '?content=' + encodeURIComponent(input);
     }
   </script>
 </head>
-
 <body onload="loadContent()" class="p-4">
-  <textarea id="contentArea" class="w-full h-64 p-2 border rounded" placeholder="Paste your HTML content here"></textarea>
-  <button id="loadButton" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded">Load Content</button>
-  <div id="displayArea" class="mt-4"></div>
+  <div id="input-area" style="display: none;">
+    <textarea id="uri-input" class="w-full h-64 p-2 border rounded" placeholder="Paste your data URI here"></textarea>
+    <button onclick="handleSubmit()" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded">Load Content</button>
+  </div>
 </body>
-
 </html>
