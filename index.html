@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Data URI Viewer</title>
+  <title>HTML Content Viewer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
     function getUrlParameter(name) {
       name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -13,13 +15,18 @@
     }
 
     function loadContent() {
-      const content = getUrlParameter('data');
+      const content = getUrlParameter('content');
       if (content) {
-        window.location.href = content;
+        document.getElementById('content').innerHTML = content;
+      } else {
+        document.getElementById('content').innerHTML = '<p>No content provided.</p>';
       }
     }
   </script>
 </head>
+
 <body onload="loadContent()">
+  <div id="content"></div>
 </body>
+
 </html>
