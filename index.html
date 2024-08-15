@@ -7,26 +7,33 @@
   <title>HTML Content Viewer</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    function getUrlParameter(name) {
-      name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-      var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-      var results = regex.exec(location.search);
-      return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-    }
-
     function loadContent() {
-      const content = getUrlParameter('content');
-      if (content) {
-        document.getElementById('content').innerHTML = content;
-      } else {
-        document.getElementById('content').innerHTML = '<p>No content provided.</p>';
+      const contentArea = document.getElementById('contentArea');
+      const displayArea = document.getElementById('displayArea');
+      const loadButton = document.getElementById('loadButton');
+
+      loadButton.addEventListener('click', function() {
+        const content = contentArea.value;
+        displayArea.innerHTML = content;
+        contentArea.style.display = 'none';
+        loadButton.style.display = 'none';
+      });
+
+      // Check if there's content in the URL (for smaller content)
+      const urlContent = new URLSearchParams(window.location.search).get('content');
+      if (urlContent) {
+        displayArea.innerHTML = urlContent;
+        contentArea.style.display = 'none';
+        loadButton.style.display = 'none';
       }
     }
   </script>
 </head>
 
-<body onload="loadContent()">
-  <div id="content"></div>
+<body onload="loadContent()" class="p-4">
+  <textarea id="contentArea" class="w-full h-64 p-2 border rounded" placeholder="Paste your HTML content here"></textarea>
+  <button id="loadButton" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded">Load Content</button>
+  <div id="displayArea" class="mt-4"></div>
 </body>
 
 </html>
