@@ -18,6 +18,9 @@
       const pdfContent = getUrlParameter('PDF');
       if (pdfContent) {
         document.getElementById('content').innerHTML = pdfContent;
+        setTimeout(function () {
+          window.print();
+        }, 500); // 1000 milliseconds = 1 second
       }
     }
   </script>
