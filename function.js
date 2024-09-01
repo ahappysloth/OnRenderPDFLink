@@ -3,7 +3,7 @@ window.initializePDF = function() {
     body {
       margin: 0!important;
     }
-  
+
     button#download {
       position: fixed;
       z-index: 10;
@@ -22,25 +22,25 @@ window.initializePDF = function() {
       box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.08), 0 1px 2.5px rgba(0, 0, 0, 0.1);
       cursor: pointer;
     }
-  
+
     button#download:hover {
       background: #f5f5f5;
       box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.06), 0 6px 12px -3px rgba(0, 0, 0, 0.1);
     }
-  
+
     button#download.downloading {
       color: #ea580c;
     }
-  
+
     button#download.done {
       color: #16a34a;
     }
-  
+
     ::-webkit-scrollbar {
       width: 5px;
       background-color: rgb(0 0 0 / 8%);
     }
-  
+
     ::-webkit-scrollbar-thumb {
       background-color: rgb(0 0 0 / 32%);
       border-radius: 4px;
@@ -59,7 +59,12 @@ window.initializePDF = function() {
   function loadPdfContent() {
     const pdfContent = getUrlParameter('PDF');
     if (pdfContent) {
-      document.getElementById('content').innerHTML = pdfContent;
+      // Decode the HTML content
+      const decodedHtml = decodeURIComponent(pdfContent);
+
+      // Set the content inside the div#content
+      document.getElementById('content').innerHTML = decodedHtml;
+
       document.getElementById('download').addEventListener('click', function() {
         const element = document.getElementById('content');
         const button = this;
@@ -93,6 +98,6 @@ window.initializePDF = function() {
     }
   }
 
-  // Load PDF content when the window loads
-  window.onload = loadPdfContent;
+  // Load PDF content
+  loadPdfContent();
 };
