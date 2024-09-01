@@ -6,24 +6,16 @@
   <title>HTML to PDF</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
   <style>
-    body {
-      background-color: #fafafa;
-      margin: 0!important;
-    }
-  
-    .pdf-header {
-      position: fixed;
-      top: 0;
-      right: 0;
-      padding: 16px;
-      z-index: 1;
-      margin-bottom: 32px;
-      width: 100%;
-      background: #ffffff;
-      box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.08), 0 1px 2.5px rgba(0, 0, 0, 0.1);
-    }
+        body {
+	  background-color: #fafafa;
+	  margin: 0!important
+	}
 
-    button#download {
+        header {
+	  max-width: 1240px;
+	}
+	  
+	button#download {
 	  position: fixed;
           z-index: 10;
 	  border-radius: 0.5rem;
@@ -67,10 +59,12 @@
   </style>
 </head>
 <body onload="loadPdfContent()">
-  <div class="pdf-header">
-    <button id="download">Download</button>
+  <div class="main">
+    <div class="header">
+      <button id="download">Download</button>
+    </div>
+    <div id="content"></div>
   </div>
-  <div id="content"></div>
 
   <script>
     // Function to get URL parameter
@@ -86,11 +80,6 @@
       const pdfContent = getUrlParameter('PDF');
       if (pdfContent) {
         document.getElementById('content').innerHTML = pdfContent;
-
-        // Add download button inside PDF content
-        const downloadButtonHTML = `<button id="download">Download</button>`;
-        document.getElementById('content').insertAdjacentHTML('afterbegin', downloadButtonHTML);
-
         document.getElementById('download').addEventListener('click', function() {
           const element = document.getElementById('content');
           const button = this;
