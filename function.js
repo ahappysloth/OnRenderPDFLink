@@ -1,4 +1,4 @@
-window.function = function() {
+window.initializePDF = function() {
   const customCSS = `
     body {
       margin: 0!important;
