@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HTML to PDF</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="function.js"></script> <!-- Add this line -->
-  <script src="driver.js"></script>   <!-- Add this line -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script> <!-- Add this line -->
+  <script src="function.js"></script>
+  <script src="driver.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
   <style>
     body {
       margin: 0!important;
@@ -77,6 +76,16 @@
       const fidelity = getUrlParameter('Fidelity') || 'standard';
       const customDimensions = getUrlParameter('CustomDimensions') || '';
 
+      const fidelityMap = {
+        'standard': 1,
+        'high': 2
+      };
+
+      const formatDimensions = {
+        'a4': '[210, 297]',
+        'letter': '[216, 279]'
+      }[format] || format;
+
       const originalHTML = `
         <style>${document.querySelector('style').innerHTML}</style>
         <div class="main">
@@ -108,7 +117,7 @@
               jsPDF: {
                 unit: 'px',
                 orientation: '${orientation}',
-                format: [${formatDimensions}],
+                format: ${formatDimensions},
                 hotfixes: ['px_scaling']
               }
             };
@@ -134,5 +143,4 @@
 <body>
   <div id="content"></div>
 </body>
-
 </html>
