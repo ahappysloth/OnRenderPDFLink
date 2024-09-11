@@ -1,4 +1,5 @@
-![image](https://github.com/user-attachments/assets/05e745ac-d19c-4c60-b66c-ae4944783113)
+![image](https://github.com/user-attachments/assets/6ced8c5f-e694-4320-bbce-0a77d1428982)
+
 
 
 # HTML to PDF Glide Plugin
